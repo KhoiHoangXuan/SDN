@@ -122,40 +122,40 @@ class Part3Controller(object):
 
 
         # Go to s1
-        msg_notrust = of.ofp_flow_mod()
-        msg_notrust.match = of.ofp_match(
+        msg_s1 = of.ofp_flow_mod()
+        msg_s1.match = of.ofp_match(
             dl_type=plib.ethernet.IP_TYPE,
             nw_dst="10.0.1.10",
         )  
-        msg_notrust.actions.append(of.ofp_action_output(port=1)) 
-        self.connection.send(msg_notrust)
+        msg_s1.actions.append(of.ofp_action_output(port=1)) 
+        self.connection.send(msg_s1)
 
         # Go to s2
-        msg_notrust = of.ofp_flow_mod()
-        msg_notrust.match = of.ofp_match(
+        msg_s2 = of.ofp_flow_mod()
+        msg_s2.match = of.ofp_match(
             dl_type=plib.ethernet.IP_TYPE,
             nw_dst="10.0.2.20",
         )  
-        msg_notrust.actions.append(of.ofp_action_output(port=2)) 
-        self.connection.send(msg_notrust)
+        msg_s2.actions.append(of.ofp_action_output(port=2)) 
+        self.connection.send(msg_s2)
 
         # Go to s3
-        msg_notrust = of.ofp_flow_mod()
-        msg_notrust.match = of.ofp_match(
+        msg_s3 = of.ofp_flow_mod()
+        msg_s3.match = of.ofp_match(
             dl_type=plib.ethernet.IP_TYPE,
             nw_dst="10.0.3.30",
         )  
-        msg_notrust.actions.append(of.ofp_action_output(port=3)) 
-        self.connection.send(msg_notrust)
+        msg_s3.actions.append(of.ofp_action_output(port=3)) 
+        self.connection.send(msg_s3)
 
         # Go to dcs31
-        msg_notrust = of.ofp_flow_mod()
-        msg_notrust.match = of.ofp_match(
+        msg_dcs31 = of.ofp_flow_mod()
+        msg_dcs31.match = of.ofp_match(
             dl_type=plib.ethernet.IP_TYPE,
             nw_dst="10.0.4.10",
         )  
-        msg_notrust.actions.append(of.ofp_action_output(port=4)) 
-        self.connection.send(msg_notrust)
+        msg_dcs31.actions.append(of.ofp_action_output(port=4)) 
+        self.connection.send(msg_dcs31)
 
         # Go to notrust
         msg_notrust = of.ofp_flow_mod()
