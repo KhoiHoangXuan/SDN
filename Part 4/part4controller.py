@@ -6,6 +6,7 @@
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
 from pox.lib.addresses import IPAddr, IPAddr6, EthAddr
+import pox.lib.packet as plib
 from pox.lib.packet.arp import arp
 from pox.lib.packet.ethernet import ethernet
 import pox.lib.packet as plib
