@@ -8,6 +8,7 @@ import pox.openflow.libopenflow_01 as of
 from pox.lib.addresses import IPAddr, IPAddr6, EthAddr
 from pox.lib.packet.arp import arp
 from pox.lib.packet.ethernet import ethernet
+import pox.lib.packet as plib
 
 log = core.getLogger()
 
@@ -148,6 +149,7 @@ class Part4Controller(object):
         self.connection.send(msg_default)
         pass
 # ---------------------------------------------- #
+    # create ethernet packet to send
     def create_ethernet(self, packet):
         new_network = ethernet()
         new_network.type = ethernet.ARP_TYPE
@@ -159,8 +161,7 @@ class Part4Controller(object):
     def handle_arp(self):
         packet = event.parsed
 
-
-        # Cài các parameter cho gói arp
+        # Implement parameters for arp packets
         msg_arp = arp()
         msg_arp.hwtype = 1
         msg_arp.opcode = arp.REPLY
@@ -168,9 +169,9 @@ class Part4Controller(object):
         msg_arp.hwdst = packet.src
         msg_arp.protosrc = packet.payload.protodst
         msg_arp.protodst = packet.payload.protosrc
-
-        # Tạo ethernet để gửi đi
         new_network = create_ethernet(packet)
+
+        self.resend_packet(new_network.pack(), event.port)  
 
 # ---------------------------------------------- #
 
